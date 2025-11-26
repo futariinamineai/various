@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>髪の特徴選択ツール</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .option:hover {
+            border-color: #666;
+        }
+        
+        .option.selected {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+        
+        .result-box {
+            background-color: #000;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0 20px 0;
+            min-height: 60px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .result-box.empty {
+            color: #666;
+        }
+        
+        .copy-button {
+            width: 100%;
+            padding: 15px;
+            background-color: white;
+            border: 2px solid #333;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-button:hover {
+            background-color: #333;
+            color: white;
+        }
+        
+        .copy-button:active {
+            transform: scale(0.98);
+        }
+        
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .copy-notification.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>髪の長さ</h2>
+            <div class="options" id="length">
+                <div class="option" data-value="very short hair,">very short hair,</div>
+                <div class="option" data-value="short hair,">short hair,</div>
+                <div class="option" data-value="medium hair,">medium hair,</div>    <div class="option" data-value="short hair,">short hair,</div>
+                <div class="option" data-value="long hair,">long hair,</div>
+                <div class="option" data-value="very long hair,">very long hair,</div>
+                <div class="option" data-value="absurdly long hair,">absurdly long hair,</div>
+                <div class="option" data-value="bald,">bald,</div>
+                <div class="option" data-value="big hair,">big hair,</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>髪質</h2>
+            <div class="options" id="texture">
+                <div class="option" data-value="curly hair,">curly hair,</div>
+                <div class="option" data-value="flipped hair,">flipped hair,</div>
+                <div class="option" data-value="wavy hair,">wavy hair,</div>
+                <div class="option" data-value="messy hair,">messy hair,</div> 
+                <div class="option" data-value="drill hair,">drill hair,</div>
+                <div class="option" data-value="hair flaps,">hair flaps,</div>
+                <div class="option" data-value="pointy hair,">pointy hair,</div>
+                <div class="option" data-value="ringlets,">ringlets,</div>
+                <div class="option" data-value="straight hair,">straight hair,</div>
+                <div class="option" data-value="fluffy hair,">fluffy hair,</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>髪型</h2>
+            <div class="options" id="style">
+                <div class="option" data-value="bob cut,">bob cut,</div>
+                <div class="option" data-value="inverted bob,">inverted bob,</div>
+                <div class="option" data-value="pixie cut,">pixie cut,</div>
+                <div class="option" data-value="wolf cut,">wolf cut,</div>
+                <div class="option" data-value="twintails,">twintails,</div>
+                <div class="option" data-value="twin drills,">twin drills,</div>
+                <div class="option" data-value="low twintails,">low twintails,</div>
+                <div class="option" data-value="short twintails,">short twintails,</div>
+                <div class="option" data-value="uneven twintails,">uneven twintails,</div>
+                <div class="option" data-value="ponytail,">ponytail,</div>
+                <div class="option" data-value="low ponytail,">low ponytail,</div>
+                <div class="option" data-value="high ponytail,">high ponytail,</div>
+                <div class="option" data-value="short ponytail,">short ponytail,</div>
+                <div class="option" data-value="side ponytail,">side ponytail,</div>
+                <div class="option" data-value="wide ponytail,">wide ponytail,</div>
+                <div class="option" data-value="split ponytail,">split ponytail,</div>
+                <div class="option" data-value="folded ponytail,">folded ponytail,</div>
+                <div class="option" data-value="front ponytail,">front ponytail,</div>
+                <div class="option" data-value="topknot hair,">topknot hair,</div>
+                <div class="option" data-value="one side up,">one side up,</div>
+                <div class="option" data-value="two side up,">two side up,</div>
+                <div class="option" data-value="french braid,">french braid,</div>
+                <div class="option" data-value="half updo,">half updo,</div>
+                <div class="option" data-value="half up braid,">half up braid,</div>
+                <div class="option" data-value="half up half down braid,">half up half down braid,</div>
+                <div class="option" data-value="single braid,">single braid,</div>
+                <div class="option" data-value="short braid,">short braid,</div>
+                <div class="option" data-value="long braid,">long braid,</div>
+                <div class="option" data-value="braids,">braids,</div>
+                <div class="option" data-value="short braids,">short braids,</div>
+                <div class="option" data-value="long braids,">long braids,</div>
+                <div class="option" data-value="low braids,">low braids,</div>
+                <div class="option" data-value="low-braided long hair,">low-braided long hair,</div>
+                <div class="option" data-value="low tied long hair,">low tied long hair,</div>
+                <div class="option" data-value="pigtails,">pigtails,</div>
+                <div class="option" data-value="single hair bun,">single hair bun,</div>
+                <div class="option" data-value="double bun,">double bun,</div>
+                <div class="option" data-value="braided bun,">braided bun,</div>
+                <div class="option" data-value="cone hair bun,">cone hair bun,</div>
+                <div class="option" data-value="heart hair bun,">heart hair bun,</div>
+                <div class="option" data-value="donut hair bun,">donut hair bun,</div>
+                <div class="option" data-value="heart hair bun,">heart hair bun,</div>
+                <div class="option" data-value="hair rings,">hair rings,</div>
+                <div class="option" data-value="bow-shaped hair,">bow-shaped hair,</div>
+                <div class="option" data-value="hime cut,">hime cut,</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>前髪</h2>
+            <div class="options" id="front">
+                <div class="option" data-value="short bangs,">short bangs,</div>
+                <div class="option" data-value="long bangs,">long bangs,</div>
+                <div class="option" data-value="parted bangs,">parted bangs,</div>
+                <div class="option" data-value="swept bangs,">swept bangs,</div>
+                <div class="option" data-value="blunt bangs,">blunt bangs,</div>
+                <div class="option" data-value="bangs pinned back,">bangs pinned back,</div>
+                <div class="option" data-value="arched bangs,">arched bangs,</div>
+                <div class="option" data-value="choppy bangs,">choppy bangs,</div>
+                <div class="option" data-value="wispy bangs,">wispy bangs,</div>
+                <div class="option" data-value="diagonal bangs,">diagonal bangs,</div>
+                <div class="option" data-value="fanged bangs,">fanged bangs,</div>
+                <div class="option" data-value="crossed bangs,">crossed bangs,</div>
+                <div class="option" data-value="asymmetrical bangs,">asymmetrical bangs,</div>
+                <div class="option" data-value="hair between eyes,">hair between eyes,</div>
+                <div class="option" data-value="hair over one eye,">hair over one eye,</div>
+                <div class="option" data-value="hair over eyes,">hair over eyes,</div>
+                <div class="option" data-value="hair intakes,">hair intakes,</div>
+                <div class="option" data-value="single hair intake,">single hair intake,</div>
+            </div>
+        </div>
+        
+
+        <div class="section">
+            <h2>横髪</h2>
+            <div class="options" id="side">
+                <div class="option" data-value="short sidelocks,">short sidelocks,</div>
+                <div class="option" data-value="long sidelocks,">long sidelocks,</div>
+                <div class="option" data-value="single sidelocks,">single sidelocks,</div>
+                <div class="option" data-value="asymmetrical sidelocks,">asymmetrical sidelocks,</div>
+                <div class="option" data-value="drill sidelocks,">drill sidelocks,</div>
+                <div class="option" data-value="low-tied sidelocks,">low-tied sidelocks,</div>
+                <div class="option" data-value="sidelocks tied back,">sidelocks tied back,</div>
+                <div class="option" data-value="braided sidelocks,">braided sidelocks,</div>
+            </div>
+        </div>
+               
+
+        <div class="section">
+            <h2>アホ毛</h2>
+            <div class="options" id="ahoge">
+                <div class="option" data-value="ahoge,">ahoge,</div>
+                <div class="option" data-value="heart ahoge,">heart ahoge,</div>
+                <div class="option" data-value="huge ahoge,">huge ahoge,</div>
+                <div class="option" data-value="antenna hair,">antenna hair,</div>
+                <div class="option" data-value="heart antenna hair,">heart antenna hair,</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>髪の色</h2>
+            <div class="options" id="color">
+                <div class="option" data-value="black hair,">black hair,</div>
+                <div class="option" data-value="gray hair,">gray hair,</div>
+                <div class="option" data-value="silver hair,">silver hair,</div>
+                <div class="option" data-value="brown hair,">brown hair,</div>
+                <div class="option" data-value="light brown hair,">light brown hair,</div>
+                <div class="option" data-value="blonde hair,">blonde hair,</div>
+                <div class="option" data-value="yellow hair,">yellow hair,</div>
+                <div class="option" data-value="light yellow hair,">light yellow hair,</div>
+                <div class="option" data-value="dark pink hair,">dark pink hair,</div>
+                <div class="option" data-value="pink hair,">pink hair,</div>
+                <div class="option" data-value="light pink hair,">light pink hair,</div>
+                <div class="option" data-value="pale pink hair,">pale pink hair,</div>
+                <div class="option" data-value="dark blue hair,">dark blue hair,</div>
+                <div class="option" data-value="blue hair,">blue hair,</div>
+                <div class="option" data-value="light blue hair,">light blue hair,</div>
+                <div class="option" data-value="pale blue hair,">pale blue hair,</div>
+                <div class="option" data-value="turquoise hair,">turquoise hair,</div>
+                <div class="option" data-value="dark green hair,">dark green hair,</div>
+                <div class="option" data-value="green hair,">green hair,</div>
+                <div class="option" data-value="light green hair,">light green hair,</div>
+                <div class="option" data-value="pale green hair,">pale green hair,</div>
+                <div class="option" data-value="yellow green hair,">yellow green hair,</div>
+                <div class="option" data-value="orange hair,">orange hair,</div>
+                <div class="option" data-value="dark red hair,">dark red hair,</div>
+                <div class="option" data-value="red hair,">red hair,</div>
+                <div class="option" data-value="dark purple hair,">dark purple hair,</div>
+                <div class="option" data-value="purple hair,">purple hair,</div>
+                <div class="option" data-value="light purple hair,">light purple hair,</div>
+                <div class="option" data-value="pale purple hair,">pale purple hair,</div>
+            </div>
+        </div>
+        
+        
+        <div class="result-box" id="result">選択した項目がここに表示されます</div>
+        
+        <button class="copy-button" id="copyBtn">クリップボードにコピー</button>
+    </div>
+    
+    <div class="copy-notification" id="notification">コピーしました！</div>
+    
+    <script>
+        const resultBox = document.getElementById('result');
+        const copyBtn = document.getElementById('copyBtn');
+        const notification = document.getElementById('notification');
+        let selectedItems = [];
+        
+        // すべてのオプションにクリックイベントを追加
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                updateResult();
+            });
+        });
+        
+        // 選択結果を更新
+        function updateResult() {
+            selectedItems = [];
+            document.querySelectorAll('.option.selected').forEach(option => {
+                selectedItems.push(option.dataset.value);
+            });
+            
+            if (selectedItems.length > 0) {
+                resultBox.textContent = selectedItems.join(' ');
+                resultBox.classList.remove('empty');
+            } else {
+                resultBox.textContent = '選択した項目がここに表示されます';
+                resultBox.classList.add('empty');
+            }
+        }
+        
+        // クリップボードにコピー
+        copyBtn.addEventListener('click', async function() {
+            const text = selectedItems.join(' ');
+            
+            if (text) {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    showNotification();
+                } catch (err) {
+                    // フォールバック方法
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    showNotification();
+                }
+            }
+        });
+        
+        // 通知を表示
+        function showNotification() {
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
