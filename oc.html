@@ -1,156 +1,644 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>稲嶺双人のうちのこ</title>
-    <style>
-        body {
-            background: #ffffff;
-            color: #000000;
-            font-family: sans-serif;
-            line-height: 1.8;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>稲嶺双人のうちのこまとめ</title>
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+<style>
+:root {
+    --text: #4a4a4a;
+    --subtext: #888;
+    --background: #fffdfd;
 
-        nav {
-            margin-bottom: 50px;
-            padding: 20px;
-            border: 1px solid #000000;
-        }
+    /* イメージカラー */
+    --katari: #b8dfc5;
+    --katari-light: #edf8f0;
 
-        nav ul {
-            margin: 0;
-            padding-left: 25px;
-        }
+    --natari: #afd8eb;
+    --natari-light: #edf7fb;
 
-        section {
-            margin-bottom: 80px;
-            scroll-margin-top: 20px;
-        }
+    --gosuko: #c9b8e5;
+    --gosuko-light: #f4f0fa;
 
-        h2 {
-            border-bottom: 2px solid #000000;
-            padding-bottom: 5px;
-        }
+    --beruko: #f28f8f;
+    --beruko-light: #fff0f0;
 
-        .character-image {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            margin: 20px auto;
-        }
+    --momo: #f3b6cf;
+    --momo-light: #fff1f6;
+}
 
-        .profile {
-            margin: 20px 0;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        .profile p {
-            margin: 5px 0;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .back-to-top {
-            font-size: 0.9em;
-        }
-    </style>
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        "Meiryo",
+        sans-serif;
+    line-height: 1.8;
+}
+
+.container {
+    width: min(900px, calc(100% - 32px));
+    margin: 0 auto;
+}
+
+/* ===== タイトル ===== */
+
+header {
+    text-align: center;
+    padding: 70px 0 45px;
+}
+
+.title-decoration {
+    color: #a8cdb4;
+    letter-spacing: 0.35em;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(26px, 5vw, 38px);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.subtitle {
+    margin: 12px 0 0;
+    color: var(--subtext);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+}
+
+/* ===== キャラクター一覧 ===== */
+
+.character-nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 70px;
+}
+
+.character-nav a {
+    display: block;
+    padding: 11px 6px;
+    text-align: center;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 999px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.character-nav a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px #00000012;
+}
+
+.nav-katari {
+    border-color: var(--katari) !important;
+}
+
+.nav-natari {
+    border-color: var(--natari) !important;
+}
+
+.nav-gosuko {
+    border-color: var(--gosuko) !important;
+}
+
+.nav-beruko {
+    border-color: var(--beruko) !important;
+}
+
+.nav-momo {
+    border-color: var(--momo) !important;
+}
+
+/* ===== キャラクター ===== */
+
+.character {
+    margin-bottom: 100px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 24px;
+    box-shadow: 0 8px 30px #00000009;
+    scroll-margin-top: 25px;
+}
+
+.character-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 0 0 25px;
+
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.character-title::before {
+    content: "";
+    width: 9px;
+    height: 30px;
+    border-radius: 999px;
+}
+
+.katari .character-title::before {
+    background: var(--katari);
+}
+
+.natari .character-title::before {
+    background: var(--natari);
+}
+
+.gosuko .character-title::before {
+    background: var(--gosuko);
+}
+
+.beruko .character-title::before {
+    background: var(--beruko);
+}
+
+.momo .character-title::before {
+    background: var(--momo);
+}
+
+/* ===== イラスト ===== */
+
+.character-image {
+    display: block;
+
+    /* 832×1216の画像を大きくしすぎない */
+    width: min(100%, 520px);
+
+    height: auto;
+
+    margin: 0 auto 30px;
+
+    border-radius: 16px;
+}
+
+/* ===== プロフィール ===== */
+
+.profile {
+    width: min(100%, 620px);
+
+    margin: 0 auto 30px;
+
+    padding: 22px 25px;
+
+    border-radius: 18px;
+}
+
+.katari .profile {
+    background: var(--katari-light);
+}
+
+.natari .profile {
+    background: var(--natari-light);
+}
+
+.gosuko .profile {
+    background: var(--gosuko-light);
+}
+
+.beruko .profile {
+    background: var(--beruko-light);
+}
+
+.momo .profile {
+    background: var(--momo-light);
+}
+
+.profile p {
+    display: flex;
+    margin: 7px 0;
+    font-size: 14px;
+}
+
+.profile-label {
+    min-width: 90px;
+    font-weight: 600;
+}
+
+.profile-value {
+    color: #555;
+}
+
+/* ===== ページ上部へ ===== */
+
+.back-to-top {
+    text-align: center;
+    margin: 28px 0 0;
+
+    font-size: 12px;
+    color: #999;
+}
+
+.back-to-top a {
+    text-decoration: none;
+    border-bottom: 1px dotted #bbb;
+}
+
+/* ===== フッター ===== */
+
+footer {
+    text-align: center;
+    padding: 10px 0 60px;
+
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* ===== スマートフォン ===== */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: min(100% - 20px, 900px);
+    }
+
+    header {
+        padding: 45px 0 30px;
+    }
+
+    .character-nav {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 45px;
+    }
+
+    .character-nav a:last-child {
+        grid-column: span 2;
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .character {
+        padding: 18px;
+        border-radius: 20px;
+        margin-bottom: 60px;
+    }
+
+    .character-title {
+        font-size: 23px;
+        margin-bottom: 20px;
+    }
+
+    .character-title::before {
+        width: 8px;
+        height: 25px;
+    }
+
+    .character-image {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .profile {
+        padding: 17px 18px;
+        border-radius: 14px;
+    }
+
+    .profile p {
+        display: block;
+        margin: 8px 0;
+    }
+
+    .profile-label {
+        min-width: 0;
+        margin-right: 8px;
+    }
+}
+</style>
 </head>
+
+
 <body id="top">
 
-    <h1>稲嶺双人のうちのこ</h1>
+<header class="container">
 
-    <nav aria-label="キャラクター一覧">
-        <ul>
-            <li><a href="#katari">かたり</a></li>
-            <li><a href="#natari">なたり</a></li>
-            <li><a href="#gosuko">ゴス子</a></li>
-            <li><a href="#beruko">ベル子</a></li>
-            <li><a href="#momo">モモ</a></li>
-        </ul>
-    </nav>
+    <div class="title-decoration">
+        ✦　✦　✦
+    </div>
 
-    <main>
-        <section id="katari">
-            <h2>かたり</h2>
-            <img src="katari01.png" alt="かたり" class="character-image">
+    <h1>
+        稲嶺双人のうちのこまとめ
+    </h1>
 
-            <div class="profile">
-                <p>誕生日 : 11月18日</p>
-                <p>性別 : 無性別</p>
-                <p>好きなもの : たまご料理</p>
-                <p>本来の姿 : 天使</p>
-            </div>
+    <p class="subtitle">
+        CHARACTER PROFILE
+    </p>
 
-            <img src="katari02.png" alt="かたりの本来の姿" class="character-image">
-            <p class="back-to-top"><a href="#top">ページ上部へ戻る</a></p>
-        </section>
+</header>
 
-        <section id="natari">
-            <h2>なたり</h2>
-            <img src="natari01.png" alt="なたり" class="character-image">
 
-            <div class="profile">
-                <p>誕生日 : 2月22日</p>
-                <p>性別 : 男の娘</p>
-                <p>好きなもの : おさかな</p>
-                <p>本来の姿 : 猫</p>
-            </div>
+<!-- キャラクター一覧 -->
 
-            <img src="natari02.png" alt="なたりの本来の姿" class="character-image">
-            <p class="back-to-top"><a href="#top">ページ上部へ戻る</a></p>
-        </section>
+<nav class="container character-nav">
 
-        <section id="gosuko">
-            <h2>ゴス子</h2>
-            <img src="gosuko01.png" alt="ゴス子" class="character-image">
+    <a href="#katari" class="nav-katari">
+        かたり
+    </a>
 
-            <div class="profile">
-                <p>誕生日 : 5月4日</p>
-                <p>性別 : 女性</p>
-                <p>本名 : 後藤素子</p>
-                <p>本来の姿 : 14歳の中学二年生</p>
-            </div>
+    <a href="#natari" class="nav-natari">
+        なたり
+    </a>
 
-            <img src="gosuko02.png" alt="ゴス子の本来の姿" class="character-image">
-            <p class="back-to-top"><a href="#top">ページ上部へ戻る</a></p>
-        </section>
+    <a href="#gosuko" class="nav-gosuko">
+        ゴス子
+    </a>
 
-        <section id="beruko">
-            <h2>ベル子</h2>
-            <img src="beruko01.png" alt="ベル子" class="character-image">
+    <a href="#beruko" class="nav-beruko">
+        ベル子
+    </a>
 
-            <div class="profile">
-                <p>誕生日 : 6月6日</p>
-                <p>性別 : 女性</p>
-                <p>本名 : 人間には発音できない</p>
-                <p>本来の姿 : 悪魔</p>
-            </div>
+    <a href="#momo" class="nav-momo">
+        モモ
+    </a>
 
-            <img src="beruko02.png" alt="ベル子の本来の姿" class="character-image">
-            <p class="back-to-top"><a href="#top">ページ上部へ戻る</a></p>
-        </section>
+</nav>
 
-        <section id="momo">
-            <h2>モモ</h2>
-            <img src="momo01.png" alt="モモ" class="character-image">
 
-            <div class="profile">
-                <p>誕生日 : 4月23日</p>
-                <p>性別 : 女性</p>
-                <p>好きなもの : おにく</p>
-                <p>本来の姿 : ベル子が飼っているドラゴン</p>
-            </div>
+<main class="container">
 
-            <img src="momo02.png" alt="モモの本来の姿" class="character-image">
-            <p class="back-to-top"><a href="#top">ページ上部へ戻る</a></p>
-        </section>
-    </main>
+
+<!-- ==================== かたり ==================== -->
+
+<section id="katari" class="character katari">
+
+    <h2 class="character-title">
+        かたり
+    </h2>
+
+    <img
+        src="katari01.png"
+        alt="かたり"
+        class="character-image"
+    >
+
+    <div class="profile">
+
+        <p>
+            <span class="profile-label">誕生日</span>
+            <span>11月18日</span>
+        </p>
+
+        <p>
+            <span class="profile-label">性別</span>
+            <span>無性別</span>
+        </p>
+
+        <p>
+            <span class="profile-label">好きなもの</span>
+            <span>たまご料理</span>
+        </p>
+
+        <p>
+            <span class="profile-label">本来の姿</span>
+            <span>天使</span>
+        </p>
+
+    </div>
+
+    <img
+        src="katari02.png"
+        alt="かたりの本来の姿"
+        class="character-image"
+    >
+
+    <p class="back-to-top">
+        <a href="#top">↑ ページ上部へ</a>
+    </p>
+
+</section>
+
+
+<!-- ==================== なたり ==================== -->
+
+<section id="natari" class="character natari">
+
+    <h2 class="character-title">
+        なたり
+    </h2>
+
+    <img
+        src="natari01.png"
+        alt="なたり"
+        class="character-image"
+    >
+
+    <div class="profile">
+
+        <p>
+            <span class="profile-label">誕生日</span>
+            <span>2月22日</span>
+        </p>
+
+        <p>
+            <span class="profile-label">性別</span>
+            <span>男の娘</span>
+        </p>
+
+        <p>
+            <span class="profile-label">好きなもの</span>
+            <span>おさかな</span>
+        </p>
+
+        <p>
+            <span class="profile-label">本来の姿</span>
+            <span>猫</span>
+        </p>
+
+    </div>
+
+    <img
+        src="natari02.png"
+        alt="なたりの本来の姿"
+        class="character-image"
+    >
+
+    <p class="back-to-top">
+        <a href="#top">↑ ページ上部へ</a>
+    </p>
+
+</section>
+
+
+<!-- ==================== ゴス子 ==================== -->
+
+<section id="gosuko" class="character gosuko">
+
+    <h2 class="character-title">
+        ゴス子
+    </h2>
+
+    <img
+        src="gosuko01.png"
+        alt="ゴス子"
+        class="character-image"
+    >
+
+    <div class="profile">
+
+        <p>
+            <span class="profile-label">誕生日</span>
+            <span>5月4日</span>
+        </p>
+
+        <p>
+            <span class="profile-label">性別</span>
+            <span>女性</span>
+        </p>
+
+        <p>
+            <span class="profile-label">本名</span>
+            <span>後藤素子</span>
+        </p>
+
+        <p>
+            <span class="profile-label">本来の姿</span>
+            <span>14歳の中学二年生</span>
+        </p>
+
+    </div>
+
+    <img
+        src="gosuko02.png"
+        alt="ゴス子の本来の姿"
+        class="character-image"
+    >
+
+    <p class="back-to-top">
+        <a href="#top">↑ ページ上部へ</a>
+    </p>
+
+</section>
+
+
+<!-- ==================== ベル子 ==================== -->
+
+<section id="beruko" class="character beruko">
+
+    <h2 class="character-title">
+        ベル子
+    </h2>
+
+    <img
+        src="beruko01.png"
+        alt="ベル子"
+        class="character-image"
+    >
+
+    <div class="profile">
+
+        <p>
+            <span class="profile-label">誕生日</span>
+            <span>6月6日</span>
+        </p>
+
+        <p>
+            <span class="profile-label">性別</span>
+            <span>女性</span>
+        </p>
+
+        <p>
+            <span class="profile-label">本名</span>
+            <span>人間には発音できない</span>
+        </p>
+
+        <p>
+            <span class="profile-label">本来の姿</span>
+            <span>悪魔</span>
+        </p>
+
+    </div>
+
+    <img
+        src="beruko02.png"
+        alt="ベル子の本来の姿"
+        class="character-image"
+    >
+
+    <p class="back-to-top">
+        <a href="#top">↑ ページ上部へ</a>
+    </p>
+
+</section>
+
+
+<!-- ==================== モモ ==================== -->
+
+<section id="momo" class="character momo">
+
+    <h2 class="character-title">
+        モモ
+    </h2>
+
+    <img
+        src="momo01.png"
+        alt="モモ"
+        class="character-image"
+    >
+
+    <div class="profile">
+
+        <p>
+            <span class="profile-label">誕生日</span>
+            <span>4月23日</span>
+        </p>
+
+        <p>
+            <span class="profile-label">性別</span>
+            <span>女性</span>
+        </p>
+
+        <p>
+            <span class="profile-label">好きなもの</span>
+            <span>おにく</span>
+        </p>
+
+        <p>
+            <span class="profile-label">本来の姿</span>
+            <span>ベル子が飼っているドラゴン</span>
+        </p>
+
+    </div>
+
+    <img
+        src="momo02.png"
+        alt="モモの本来の姿"
+        class="character-image"
+    >
+
+    <p class="back-to-top">
+        <a href="#top">↑ ページ上部へ</a>
+    </p>
+
+</section>
+
+</main>
+
+
+<footer>
+    ✦ 稲嶺双人のうちのこまとめ ✦
+</footer>
 
 </body>
 </html>
