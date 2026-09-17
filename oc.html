@@ -26,6 +26,9 @@
 
     --momo: #f3b6cf;
     --momo-light: #fff1f6;
+
+    --kuma: #eadb9a;
+    --kuma-light: #fffbea;
 }
 
 * {
@@ -86,7 +89,7 @@ h1 {
 
 .character-nav {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     margin-bottom: 70px;
 }
@@ -126,6 +129,10 @@ h1 {
 
 .nav-momo {
     border-color: var(--momo) !important;
+}
+
+.nav-kuma {
+    border-color: var(--kuma) !important;
 }
 
 /* ===== キャラクター ===== */
@@ -179,18 +186,17 @@ h1 {
     background: var(--momo);
 }
 
+.kuma .character-title::before {
+    background: var(--kuma);
+}
+
 /* ===== イラスト ===== */
 
 .character-image {
     display: block;
-
-    /* 832×1216の画像を大きくしすぎない */
     width: min(100%, 520px);
-
     height: auto;
-
     margin: 0 auto 30px;
-
     border-radius: 16px;
 }
 
@@ -198,11 +204,8 @@ h1 {
 
 .profile {
     width: min(100%, 620px);
-
     margin: 0 auto 30px;
-
     padding: 22px 25px;
-
     border-radius: 18px;
 }
 
@@ -226,6 +229,10 @@ h1 {
     background: var(--momo-light);
 }
 
+.kuma .profile {
+    background: var(--kuma-light);
+}
+
 .profile p {
     display: flex;
     margin: 7px 0;
@@ -246,7 +253,6 @@ h1 {
 .back-to-top {
     text-align: center;
     margin: 28px 0 0;
-
     font-size: 12px;
     color: #999;
 }
@@ -261,7 +267,6 @@ h1 {
 footer {
     text-align: center;
     padding: 10px 0 60px;
-
     color: #aaa;
     font-size: 12px;
 }
@@ -373,6 +378,10 @@ footer {
         モモ
     </a>
 
+    <a href="#kuma" class="nav-kuma">
+        くま
+    </a>
+
 </nav>
 
 
@@ -387,11 +396,7 @@ footer {
         かたり
     </h2>
 
-    <img
-        src="katari01.png"
-        alt="かたり"
-        class="character-image"
-    >
+    <img src="katari01.png" alt="かたり" class="character-image">
 
     <div class="profile">
 
@@ -417,11 +422,7 @@ footer {
 
     </div>
 
-    <img
-        src="katari02.png"
-        alt="かたりの本来の姿"
-        class="character-image"
-    >
+    <img src="katari02.png" alt="かたりの本来の姿" class="character-image">
 
     <p class="back-to-top">
         <a href="#top">↑ ページ上部へ</a>
@@ -438,11 +439,7 @@ footer {
         なたり
     </h2>
 
-    <img
-        src="natari01.png"
-        alt="なたり"
-        class="character-image"
-    >
+    <img src="natari01.png" alt="なたり" class="character-image">
 
     <div class="profile">
 
@@ -468,11 +465,7 @@ footer {
 
     </div>
 
-    <img
-        src="natari02.png"
-        alt="なたりの本来の姿"
-        class="character-image"
-    >
+    <img src="natari02.png" alt="なたりの本来の姿" class="character-image">
 
     <p class="back-to-top">
         <a href="#top">↑ ページ上部へ</a>
@@ -489,11 +482,7 @@ footer {
         ゴス子
     </h2>
 
-    <img
-        src="gosuko01.png"
-        alt="ゴス子"
-        class="character-image"
-    >
+    <img src="gosuko01.png" alt="ゴス子" class="character-image">
 
     <div class="profile">
 
@@ -519,11 +508,7 @@ footer {
 
     </div>
 
-    <img
-        src="gosuko02.png"
-        alt="ゴス子の本来の姿"
-        class="character-image"
-    >
+    <img src="gosuko02.png" alt="ゴス子の本来の姿" class="character-image">
 
     <p class="back-to-top">
         <a href="#top">↑ ページ上部へ</a>
@@ -540,11 +525,7 @@ footer {
         ベル子
     </h2>
 
-    <img
-        src="beruko01.png"
-        alt="ベル子"
-        class="character-image"
-    >
+    <img src="beruko01.png" alt="ベル子" class="character-image">
 
     <div class="profile">
 
@@ -570,11 +551,7 @@ footer {
 
     </div>
 
-    <img
-        src="beruko02.png"
-        alt="ベル子の本来の姿"
-        class="character-image"
-    >
+    <img src="beruko02.png" alt="ベル子の本来の姿" class="character-image">
 
     <p class="back-to-top">
         <a href="#top">↑ ページ上部へ</a>
@@ -591,11 +568,7 @@ footer {
         モモ
     </h2>
 
-    <img
-        src="momo01.png"
-        alt="モモ"
-        class="character-image"
-    >
+    <img src="momo01.png" alt="モモ" class="character-image">
 
     <div class="profile">
 
@@ -621,17 +594,57 @@ footer {
 
     </div>
 
-    <img
-        src="momo02.png"
-        alt="モモの本来の姿"
-        class="character-image"
-    >
+    <img src="momo02.png" alt="モモの本来の姿" class="character-image">
 
     <p class="back-to-top">
         <a href="#top">↑ ページ上部へ</a>
     </p>
 
 </section>
+
+
+<!-- ==================== くま ==================== -->
+
+<section id="kuma" class="character kuma">
+
+    <h2 class="character-title">
+        くま
+    </h2>
+
+    <img src="kuma01.png" alt="くま" class="character-image">
+
+    <div class="profile">
+
+        <p>
+            <span class="profile-label">誕生日</span>
+            <span>10月28日</span>
+        </p>
+
+        <p>
+            <span class="profile-label">性別</span>
+            <span>女性</span>
+        </p>
+
+        <p>
+            <span class="profile-label">好きなもの</span>
+            <span>甘いお菓子</span>
+        </p>
+
+        <p>
+            <span class="profile-label">本来の姿</span>
+            <span>テディベアの付喪神</span>
+        </p>
+
+    </div>
+
+    <img src="kuma02.png" alt="くまの本来の姿" class="character-image">
+
+    <p class="back-to-top">
+        <a href="#top">↑ ページ上部へ</a>
+    </p>
+
+</section>
+
 
 </main>
 
